@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atharva.OS</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #fafafa;
+            color: #1a1a1a;
+            line-height: 1.75;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        header {
+            border-bottom: 1px solid #e0e0e0;
+            background: #ffffff;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .site-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #111;
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        nav {
+            display: flex;
+            gap: 8px;
+        }
+
+        .nav-link {
+            background: none;
+            border: 1px solid transparent;
+            font-size: 0.95rem;
+            color: #555;
+            cursor: pointer;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-family: inherit;
+            transition: all 0.15s ease;
+        }
+
+        .nav-link:hover {
+            color: #111;
+            background-color: #f0f0f0;
+        }
+
+        .nav-link.active {
+            color: #111;
+            font-weight: 600;
+            background-color: #eaeaea;
+            border-color: #d0d0d0;
+        }
+
+        main {
+            flex: 1;
+            padding: 40px 0 60px 0;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .about-section h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #111;
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+        }
+
+        .about-section p {
+            font-size: 1.05rem;
+            color: #2b2b2b;
+            margin-bottom: 20px;
+        }
+
+        .quote-box {
+            margin: 32px 0;
+            padding: 16px 20px;
+            border-left: 3px solid #111;
+            background-color: #f0f0f0;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #111;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .elysium-header {
+            margin-bottom: 32px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .elysium-header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #111;
+            margin-bottom: 8px;
+            letter-spacing: -0.02em;
+        }
+
+        .elysium-header p {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .tile-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        .tile-card {
+            background-color: #ffffff;
+            border: 1px solid #dcdcdc;
+            border-radius: 8px;
+            padding: 14px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            transition: border-color 0.2s ease;
+        }
+
+        .tile-card:hover {
+            border-color: #b5b5b5;
+        }
+
+        .image-wrapper {
+            width: 100%;
+            background-color: #0b1118;
+            border-radius: 6px;
+            overflow: hidden;
+            position: relative;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 6px;
+        }
+
+        .tile-title {
+            margin-top: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #222;
+        }
+
+        .fallback-container {
+            padding: 30px 20px;
+            text-align: center;
+            color: #7ee787;
+            font-family: monospace;
+            width: 100%;
+        }
+
+        .fallback-header {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #58a6ff;
+        }
+
+        .fallback-sub {
+            color: #8b949e;
+            font-size: 0.85rem;
+        }
+
+        footer {
+            border-top: 1px solid #e5e5e5;
+            padding: 24px 0;
+            background-color: #ffffff;
+            font-size: 0.85rem;
+            color: #777;
+        }
+
+        .footer-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        @media (max-width: 600px) {
+            .footer-wrapper {
+                flex-direction: column;
+                gap: 8px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-wrapper">
+            <a href="#" onclick="switchTab('about'); return false;" class="site-title">Atharva.OS</a>
+            <nav>
+                <button onclick="switchTab('about')" id="btn-about" class="nav-link active">About Me</button>
+                <button onclick="switchTab('elysium')" id="btn-elysium" class="nav-link">Elysium</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="tab-about" class="tab-content active about-section">
+            <h1>About Me</h1>
+            
+            <p>I’m Atharva, a Class 12 student and JEE aspirant from India, currently in one of the most intense phases of my academic journey.</p>
+            
+            <p>I’m deeply interested in technology, AI, software, entrepreneurship, and building things. Long term, I want to create meaningful products and develop the skills to turn ideas into reality. But right now, my primary focus is learning how to work with discipline, consistency, and depth.</p>
+            
+            <p>I’m fascinated by the intersection of productivity and technology, which led me to build Elysium — my personal productivity system. Elysium is designed around managing focus, habits, goals, missions, study progress, and personal growth. It has evolved into more than just a tracker; it’s an experiment in building a system that helps me actually execute.</p>
+            
+            <p>I care more about capability than validation. I’m trying to become someone who can sit down, do difficult work, solve hard problems, learn from failure, and keep going without constantly needing external motivation or comparison.</p>
+            
+            <p>This phase of my life is ultimately about building the foundation — academically, technically, and personally — for everything I want to do later.</p>
+            
+            <div class="quote-box">
+                Build capability. Stay curious. Execute. Repeat.
+            </div>
+        </section>
+
+        <section id="tab-elysium" class="tab-content">
+            <div class="elysium-header">
+                <h1>Elysium</h1>
+                <p>Personal productivity and focus system module showcase.</p>
+            </div>
+
+            <div class="tile-grid">
+                <div class="tile-card">
+                    <div class="image-wrapper">
+                        <img src="Screenshot 2026-09-13 164834.jpg" alt="Nexus" onerror="handleImgError(this, 'Nexus', 'Main Dashboard & System Telemetry')">
+                    </div>
+                    <div class="tile-title">Nexus</div>
+                </div>
+
+                <div class="tile-card">
+                    <div class="image-wrapper">
+                        <img src="Screenshot 2026-09-13 165014.jpg" alt="Chronos" onerror="handleImgError(this, 'Chronos', 'Deep Work Focus Timer & Audio Signals')">
+                    </div>
+                    <div class="tile-title">Chronos</div>
+                </div>
+
+                <div class="tile-card">
+                    <div class="image-wrapper">
+                        <img src="Screenshot 2026-09-13 165030.jpg" alt="Continuum" onerror="handleImgError(this, 'Continuum', 'Monthly Habits & Consistency Matrix')">
+                    </div>
+                    <div class="tile-title">Continuum</div>
+                </div>
+
+                <div class="tile-card">
+                    <div class="image-wrapper">
+                        <img src="Screenshot 2026-09-13 165115.jpg" alt="Observatory" onerror="handleImgError(this, 'Observatory', 'Revision Logs & Task Progressions')">
+                    </div>
+                    <div class="tile-title">Observatory</div>
+                </div>
+
+                <div class="tile-card">
+                    <div class="image-wrapper">
+                        <img src="Screenshot 2026-09-13 165201.jpg" alt="Stats" onerror="handleImgError(this, 'Stats', 'Focus Density & Analytics Grid')">
+                    </div>
+                    <div class="tile-title">Stats</div>
+                </div>
+
+                <div class="tile-card">
+                    <div class="image-wrapper">
+                        <img src="Screenshot 2026-09-13 165239.png" alt="Conquest" onerror="handleImgError(this, 'Conquest', 'Monthly Objectives Command')">
+                    </div>
+                    <div class="tile-title">Conquest</div>
+                </div>
+
+                <div class="tile-card">
+                    <div class="image-wrapper">
+                        <img src="Screenshot 2026-09-13 165250.jpg" alt="Command Center" onerror="handleImgError(this, 'Command Center', 'System Configuration & Presets')">
+                    </div>
+                    <div class="tile-title">Command Center</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-wrapper">
+            <span>© Atharva</span>
+            <span>Atharva.OS</span>
+        </div>
+    </footer>
+
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.getElementById('btn-about').classList.remove('active');
+            document.getElementById('btn-elysium').classList.remove('active');
+
+            if (tabId === 'about') {
+                document.getElementById('tab-about').classList.add('active');
+                document.getElementById('btn-about').classList.add('active');
+            } else if (tabId === 'elysium') {
+                document.getElementById('tab-elysium').classList.add('active');
+                document.getElementById('btn-elysium').classList.add('active');
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function handleImgError(imgElement, title, subtitle) {
+            const parent = imgElement.parentElement;
+            imgElement.style.display = 'none';
+            
+            const fallbackDiv = document.createElement('div');
+            fallbackDiv.className = 'fallback-container';
+            fallbackDiv.innerHTML = `
+                <div class="fallback-header">ELYSIUM // ${title.toUpperCase()}</div>
+                <div class="fallback-sub">${subtitle}</div>
+                <div style="margin-top: 15px; font-size: 0.75rem; color: #484f58;">[ Visual module asset ready — placed in root folder ]</div>
+            `;
+            parent.appendChild(fallbackDiv);
+        }
+    </script>
+</body>
+</html>
