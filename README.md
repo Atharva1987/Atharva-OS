@@ -14,16 +14,16 @@ My main project right now. It is a personal productivity and focus system built 
 
 The website has a dedicated showcase tab with screenshots of the system modules:
 
- 1) Nexus (Main dashboard)
+ Nexus (Main dashboard)
 
- 2) Chronos (Focus timer)
+ Chronos (Focus timer)
 
- 3)Continuum (Habit tracking)
+ Continuum (Habit tracking)
 
- 4)Observatory (Revision logging)
+ Observatory (Revision logging)
 
- 5)Stats (Focus analytics)
+ Stats (Focus analytics)
 
- 6)Conquest (Monthly objectives)
+ Conquest (Monthly objectives)
 
- 7)Command Center (System config)
+ Command Center (System config)
